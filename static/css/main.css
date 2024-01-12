@@ -1,0 +1,76 @@
+@font-face {
+  font-family: b_nazanin;
+  src: url("../fonts/BNazanin.ttf");
+}
+
+@font-face {
+  font-family: play_fair;
+  src: url("../fonts/PlayfairDisplay-Regular.otf");
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+.dir_ltr{
+    direction: ltr;
+}
+.b_nazanin {
+    font-family: b_nazanin;
+    direction: rtl;
+}
+
+.play_fair_font{
+    font-family: play_fair;
+    /*direction: ltr;*/
+}
+
+a {
+    color: rgb(128, 170, 104);
+}
+
+a:hover{
+    color: rgb(2, 119, 93);
+    text-decoration: none;
+}
+
+
+.btn {
+    border: none;
+}
+
+
+/* success color */
+.btn-success, .bg-success1{
+    background-color: rgb(2, 119, 93);
+}
+
+.btn-success{
+    color: white;
+}
+.btn-success:hover, .bg-success2{
+    background-color: rgb(128, 170, 104);
+}
+
+.text-success1{
+    color: rgb(2, 119, 93);
+}
+
+.text-success2{
+    color: rgb(128, 170, 104);
+}
+
+/* info color */
+.border-info2{
+    border-color: rgb(172, 230, 255) !important;
+}
+
+.btn-info{
+    background-color: rgb(172, 230, 255) !important;
+    color: #4e555b;
+}
+
+.btn-info:hover{
+    color: whitesmoke !important;
+    background-color: #17a2b8 !important;
+}

@@ -1,0 +1,110 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    اطلاعات مراجعه کننده
+{% endblock %}
+
+{% block content %}
+
+    <div class="row align-items-center justify-content-center">
+
+        <!-- personal information list -->
+        <ul class="list-group b_nazanin text-right col-md-6">
+
+            <!-- national code -->
+            <li class="list-group-item border border-0" data-aos="fade-up" data-aos-duration="1000">
+              <div class="border-bottom border-primary">
+                  <h4 class="font-weight-bold">
+                      <span>پرونده مراجعه کننده به کد ملی</span>
+                      <span>{{ patient.national_code }}</span>
+                  </h4>
+              </div>
+            </li>
+
+            <!-- first name -->
+            <li class="list-group-item border border-0" data-aos="fade-up" data-aos-duration="1300">
+              <div class="row align-items-center border-bottom border-left border-secondary rounded">
+                  <h5 class="col-6">نام</h5>
+                  <h5 class="col-6">{{ patient.first_name }}</h5>
+              </div>
+            </li>
+
+            <!-- last name -->
+            <li class="list-group-item border border-0" data-aos="fade-up" data-aos-duration="1600">
+              <div class="row align-items-center border-bottom border-left border-secondary rounded">
+                  <h5 class="col-6">نام خانوادگی</h5>
+                  <h5 class="col-6">{{ patient.last_name }}</h5>
+              </div>
+            </li>
+
+            <!-- age -->
+            <li class="list-group-item border border-0" data-aos="fade-up" data-aos-duration="1800">
+              <div class="row align-items-center border-bottom border-left border-secondary rounded">
+                  <h5 class="col-6">سن</h5>
+                  <h5 class="col-6">{{ patient.age }}</h5>
+              </div>
+            </li>
+
+            <!-- past medical history -->
+            <li class="list-group-item border border-0" data-aos="fade-up" data-aos-duration="2000">
+              <div class="row border-bottom border-left border-secondary rounded">
+                  <h5 class="col-6">سابقه بیماری-دارویی-درمانی</h5>
+                  <h5 class="col-6">{{ patient.past_medical_history|linebreaks }}</h5>
+              </div>
+            </li>
+
+            <!-- phone numbers -->
+            <li class="list-group-item border border-0" data-aos="fade-up" data-aos-duration="2000">
+              <div class="row border-bottom border-left border-secondary rounded">
+                  <h5 class="col-6">شماره تماس ۱</h5>
+                  {% if patient.phone %}
+                  <h5 class="col-6">{{ patient.phone.number1 }}</h5>
+                  <h5 class="col-6">شماره تماس ۲</h5>
+                  <h5 class="col-6">{{ patient.phone.number2 }}</h5>
+                  <h5 class="col-6">شماره تماس ۳</h5>
+                  <h5 class="col-6">{{ patient.phone.number3 }}</h5>
+                  <h5 class="col-6"></h5>
+                  {% endif %}
+              </div>
+            </li>
+        </ul>
+        <!-- personal information list end -->
+
+        <!-- file image -->
+        <div class="col-md-6 text-center" data-aos="fade-up" data-aos-duration="2000">
+            <img src="{% static 'images/file.png' %}" class="img-fluid">
+
+        </div>
+
+        <!-- create, update or delete boxes -->
+        <div class="col-10 b_nazanin text-center row justify-content-center">
+            <div class="col-10 col-md-5 col-lg-5 m-1 p-3 border border-info rounded" data-aos="fade-up" data-aos-duration="1400">
+                <h4 class="play_fair_font text-secondary">Personal Information</h4>
+                <img src="{% static 'images/file.png' %}" class="img-fluid figure-img px-5">
+                <span><a href="{% url 'app_patient:update_patient' patient.pk %}" class="btn btn-success text-white mb-3">ویرایش اطلاعت شخصی</a></span>
+                <span><a class="btn btn-danger text-white mb-3 b_nazanin" href="{% url 'app_patient:delete_patient' patient.pk %}">حذف پرونده</a></span>
+            </div>
+            <div class="col-10 col-md-5 col-lg-5 m-1 p-3 border border-info rounded" data-aos="fade-up" data-aos-duration="1800">
+                <h4 class="play_fair_font text-secondary">Phone Numbers</h4>
+                <img src="{% static 'images/phone.png' %}" class="img-fluid figure-img px-5">
+                <div><a class="btn btn-success text-white mb-3" href="{% url 'app_patient:update_phone' patient.pk %}">ویرایش شماره تماس ها</a></div>
+            </div>
+            <div class="col-10 col-md-5 col-lg-5 m-1 p-3 border border-info rounded" data-aos="fade-up" data-aos-duration="1600">
+                <h4 class="play_fair_font text-secondary">Prescriptions</h4>
+                <img src="{% static 'images/prescription.png' %}" class="img-fluid figure-img px-5">
+                <div><a class="btn btn-info mb-3" href="{% url 'app_patient:prescription_list' patient.pk %}">لیست نسخه های تجویز شده</a></div>
+                <div><a class="btn btn-success text-white mb-3" href="{% url 'app_patient:create_prescription' patient.pk %}">تجویز نسخه جدید</a></div>
+            </div>
+            <div class="col-10 col-md-5 col-lg-5 m-1 p-3 border border-info rounded" data-aos="fade-up" data-aos-duration="2000">
+                <h4 class="play_fair_font text-secondary">visits</h4>
+                <img src="{% static 'images/visit_purple.svg' %}" class="img-fluid figure-img px-5">
+                <div><a class="btn btn-info mb-3" href="{% url 'app_patient:visit_list' patient.pk %}">لیست ویزیت ها</a></div>
+                <div><a class="btn btn-success text-white mb-3" href="{% url 'app_patient:create_visit' patient.pk %}">ثبت ویزیت جدید</a></div>
+            </div>
+        </div>
+        <!-- create, update or delete boxes end-->
+
+    </div>
+
+{% endblock %}

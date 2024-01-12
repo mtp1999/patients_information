@@ -1,0 +1,47 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    بروزرسانی اطلاعات شخصی
+{% endblock %}
+
+
+{% block content %}
+    <div class="row align-items-center">
+        <form class="text-right col-md-5" method="post" action="">
+
+            {% csrf_token %}
+            <h3 class="b_nazanin font-weight-bold mb-3" data-aos="fade-up" data-aos-duration="1000">
+                بروزرسانی اطلاعات شخصی
+            </h3>
+            <div class="mb-3" data-aos="fade-up" data-aos-duration="1250">
+              <label for="id_national_code" class="form-label b_nazanin"><h4>کد ملی</h4></label>
+              <input type="text" class="form-control text-left dir_ltr" id="id_national_code" name="national_code" value="{{ form.national_code.value }}" maxlength="30" required placeholder="national code">
+            </div>
+            <div class="mb-3" data-aos="fade-up" data-aos-duration="1500">
+              <label for="id_first_name" class="form-label b_nazanin"><h4>نام</h4></label>
+              <input type="text" class="form-control b_nazanin" id="id_first_name" maxlength="100" required name="first_name" value="{{ form.first_name.value }}" placeholder="نام">
+            </div>
+            <div class="mb-3" data-aos="fade-up" data-aos-duration="1750">
+              <label for="id_last_name" class="form-label b_nazanin"><h4>نام خانوادگی</h4></label>
+              <input type="text" class="form-control b_nazanin" id="id_last_name" name="last_name" maxlength="100" required value="{{ form.last_name.value }}" placeholder="نام خانوادگی">
+            </div>
+            <div class="mb-3" data-aos="fade-up" data-aos-duration="2000">
+              <label for="id_birth_year" class="form-label b_nazanin"><h4>سال تولد(شمسی)</h4></label>
+              <input type="number" min="1300" class="form-control text-left dir_ltr" id="id_birth_year" value="{{ form.birth_year.value }}" required name="birth_year" placeholder="birth year">
+            </div>
+            <div class="mb-2" data-aos="fade-up" data-aos-duration="2250">
+              <label for="id_past_medical_history" class="form-label b_nazanin"><h4>سابقه بیماری/دارویی/درمانی</h4></label>
+              <textarea class="form-control b_nazanin" cols="40" rows="5" id="id_past_medical_history" name="past_medical_history">{{ form.past_medical_history.value }}</textarea>
+            </div>
+            <div class="mb-1" data-aos="fade-up" data-aos-duration="2500">
+              <button type="submit" class="btn btn-success b_nazanin">ویرایش</button>
+              <a href="{% url 'app_patient:patient_detail' patient.pk %}" class="btn btn-info b_nazanin">بازگشت</a>
+            </div>
+        </form>
+
+        <div class="col-md-7" data-aos="fade-up" data-aos-duration="2000">
+            <img src="{% static 'images/create_form.png' %}" class="img-fluid">
+        </div>
+    </div>
+{% endblock %}

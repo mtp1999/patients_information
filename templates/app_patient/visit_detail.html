@@ -1,0 +1,141 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    مشاهده ویزیت
+{% endblock %}
+
+{% block content %}
+    <div class="row align-items-center">
+
+        <div class="col-md-6 text-right mb-3">
+
+            <!-- patient name -->
+            <h4 class="font-weight-bold b_nazanin py-2 border-bottom border-info row justify-content-between mb-4" data-aos="fade-up" data-aos-duration="1200">
+                <span>
+                    <span>ویزیت</span>
+                    <span><a href="{% url 'app_patient:patient_detail' visit.patient.id %}">{{ visit.patient.full_name }}</a></span>
+                </span>
+                <span>
+                    <span>تاریخ:</span>
+                    <span>{{ visit.datetime|date:"Y/m/d" }}</span>
+                </span>
+            </h4>
+
+            <!-- chief complaint -->
+            <div class="text-right pl-3 mb-3" data-aos="fade-up" data-aos-duration="1300">
+                <div class="row justify-content-between border-bottom border-secondary">
+                    <div class="b_nazanin font-weight-bold col-6 text-right">شکایت بیمار</div>
+                    <div class="text-secondary col-6 text-left">Chief complaint</div>
+                </div>
+                <div class="b_nazanin mb-3">
+                    {{ visit.chief_complaint|linebreaks }}
+                </div>
+            </div>
+
+            <!-- Physical exam -->
+            <div class="text-right pl-3 mb-3" data-aos="fade-up" data-aos-duration="1400">
+                <div class="row justify-content-between border-bottom border-secondary">
+                    <div class="b_nazanin font-weight-bold col-6 text-right">معاینات و آزمایشات جسمی</div>
+                    <div class="text-secondary col-6 text-left">Physical exam</div>
+                </div>
+                <div class="b_nazanin mb-3">
+                    {{ visit.physical_exam|linebreaks }}
+                </div>
+            </div>
+
+            <!-- checklist and procedure-->
+            <div class="mb-3 pl-3" data-aos="fade-up" data-aos-duration="1500">
+
+                <!-- title-->
+                <div class="row justify-content-between border-bottom border-secondary">
+                    <div class="b_nazanin font-weight-bold col-6 text-right">روند درمان</div>
+                    <div class="text-secondary col-6 text-left">Procedure</div>
+                </div>
+
+                <div class="row justify-content-between">
+                    <!-- procedure -->
+                    <div class="text-center text-sm-right mb-3 col-sm-6">
+                        <div class="b_nazanin mb-3">
+                            {{ visit.procedure|linebreaks }}
+                        </div>
+                    </div>
+                    <!-- checklist -->
+                    <div class="b_nazanin mb-3 text-center text-sm-left text-secondary col-sm-6">
+                        <div>
+                            <span>manipulation</span>
+                            <span>
+                                {% if visit.manipulation %}
+                                <img src="{% static 'icons/check.png' %}" alt="Bootstrap" width="16" height="16" class="rounded text-success1 ">
+                                {% else %}
+                                <img src="{% static 'icons/uncheck.svg' %}" alt="Bootstrap" width="16" height="16" class="rounded text-success1 ">
+                            {% endif %}
+                            </span>
+                        </div>
+                        <div>
+                            <span>needle</span>
+                            <span>
+                                {% if visit.needle %}
+                                <img src="{% static 'icons/check.png' %}" alt="Bootstrap" width="16" height="16" class="rounded text-success1 ">
+                                {% else %}
+                                <img src="{% static 'icons/uncheck.svg' %}" alt="Bootstrap" width="16" height="16" class="rounded text-success1 ">
+                            {% endif %}
+                            </span>
+                        </div>
+                        <div>
+                            <span>injection</span>
+                            <span>
+                                {% if visit.injection %}
+                                <img src="{% static 'icons/check.png' %}" alt="Bootstrap" width="16" height="16" class="rounded text-success1">
+                                {% else %}
+                                <img src="{% static 'icons/uncheck.svg' %}" alt="Bootstrap" width="16" height="16" class="rounded text-success1">
+                            {% endif %}
+                            </span>
+                        </div>
+                        <div>
+                            <span>EMG</span>
+                            <span>
+                                {% if visit.emg %}
+                                <img src="{% static 'icons/check.png' %}" alt="Bootstrap" width="16" height="16" class="rounded text-success1">
+                                {% else %}
+                                <img src="{% static 'icons/uncheck.svg' %}" alt="Bootstrap" width="16" height="16" class="rounded text-success1">
+                            {% endif %}
+                            </span>
+                        </div>
+                        <div>
+                            <span>physiotherapy</span>
+                            <span>
+                                {% if visit.physiotherapy %}
+                                <img src="{% static 'icons/check.png' %}" alt="Bootstrap" width="16" height="16" class="rounded text-success1">
+                                {% else %}
+                                <img src="{% static 'icons/uncheck.svg' %}" alt="Bootstrap" width="16" height="16" class="rounded text-success1">
+                            {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- payment -->
+            <div class="text-right mb-3 px-1" data-aos="fade-up" data-aos-duration="1600">
+                <h5 class="b_nazanin mb-3 font-weight-bold text-secondary">
+                    <span>هزینه ویزیت و درمان:</span>
+                    <span>{{ visit.payment }}</span>
+                    <span>هزارتومان</span>
+                </h5>
+            </div>
+
+            <div class="mb-1" data-aos="fade-up" data-aos-duration="2000">
+                <a href="{% url 'app_patient:update_visit' visit.pk %}" class="btn btn-success b_nazanin">ویرایش</a>
+                <a href="{% url 'app_patient:delete_visit' visit.pk %}" class="btn btn-danger b_nazanin">حذف</a>
+                <a href="{% url 'app_patient:visit_list' visit.patient.pk %}" class="btn btn-info b_nazanin">لیست ویزیت ها</a>
+            </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-duration="2000">
+            <img src="{% static 'images/visit_purple.svg' %}" class="img-fluid">
+        </div>
+
+    </div>
+{% endblock %}

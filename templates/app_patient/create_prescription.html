@@ -1,0 +1,42 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    تجویز نسخه جدید
+{% endblock %}
+
+{% block content %}
+    <div class="row align-items-center p-1">
+
+        <!-- form -->
+        <form action="" method="post" class="col-md-6 text-right">
+            {% csrf_token %}
+
+            <div hidden="">
+                {{ form.datetime }}
+            </div>
+            <h4 class="font-weight-bold b_nazanin py-2" data-aos="fade-up" data-aos-duration="1200">
+                <span>
+                    <span>تجویز نسخه جدید</span>
+                    <span><a href="{% url 'app_patient:patient_detail' patient.id %}">({{ patient.full_name }})</a></span>
+                </span>
+            </h4>
+            <select name="patient" required="" id="id_patient" hidden>
+              <option value="{{ patient.pk }}" selected="selected"></option>
+            </select>
+            <textarea class="form-control text-left mb-3 dir_ltr" name="medicine_list" cols="40" rows="5" id="id_medicine_list" placeholder="english" data-aos="fade-up" data-aos-duration="1500"></textarea>
+            <div class="mb-1" data-aos="fade-up" data-aos-duration="2000">
+                <button type="submit" class="btn btn-success b_nazanin">ثبت</button>
+                <a href="{% url 'app_patient:prescription_list' patient.pk %}" class="btn btn-info b_nazanin">لیست نسخه های تجویز شده</a>
+            </div>
+        </form>
+        <!-- form end -->
+
+        <!-- image -->
+        <div class="col-md-6">
+            <img src="{% static 'images/create_form.png' %}" class="img-fluid" data-aos="fade-up" data-aos-duration="2000">
+        </div>
+
+
+    </div>
+{% endblock %}

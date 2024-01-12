@@ -1,0 +1,47 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    لیست ویزیت ها
+{% endblock %}
+
+
+{% block content %}
+    <div class="row align-items-center justify-content-around">
+        <h3 class="b_nazanin col-12 text-md-right text-sm-center font-weight-bold border-bottom border-secondary pb-2 mb-2" data-aos="fade-up" data-aos-duration="1400">
+            <span>لیست ویزیت</span>
+            <span><a href="{% url 'app_patient:patient_detail' patient.pk %}">{{ patient.full_name }}</a></span>
+        </h3>
+        {% if visit_list %}
+            {% for visit in visit_list %}
+            <div class="col-md-5 p-4 my-2 border-bottom border-left border-secondary rounded text-center b_nazanin text-secondary" data-aos="fade-up" data-aos-duration="1700">
+                <h4>
+                    <span>تاریخ مراجعه:</span>
+                    <span>{{ visit.datetime|date:"Y/m/d" }}</span>
+                </h4>
+                <h4>
+                    <span>ساعت مراجعه:</span>
+                    <span>{{ visit.datetime|date:"G:i:s" }}</span>
+                </h4>
+                <h4>
+                    <span>هزینه پرداخت شده:</span>
+                    <span>{{ visit.payment }}</span>
+                    <span>هزار تومان</span>
+                </h4>
+                <div class="mt-3">
+                    <a class="btn btn-lg btn-success mb-3" href="{% url 'app_patient:visit_detail' visit.pk %}">جزئیات</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-md-5 p-4 my-2 border-bottom border-left border-secondary rounded text-center b_nazanin text-secondary" data-aos="fade-up" data-aos-duration="1700">
+                <h4>
+                    تاکنون ویزیتی ثبت نشده است!
+                </h4>
+                <div class="mt-3">
+                    <a class="btn btn-lg btn-info mb-3" href="{% url 'app_patient:patient_detail' patient.id %}">بازگشت</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

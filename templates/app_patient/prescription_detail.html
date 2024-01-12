@@ -1,0 +1,37 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    مشاهده نسخه
+{% endblock %}
+
+{% block content %}
+    <div class="row align-items-center p-1">
+
+        <div class="col-md-6 text-right mb-3">
+            <h4 class="font-weight-bold b_nazanin py-2 border-bottom border-secondary row justify-content-between" data-aos="fade-up" data-aos-duration="1200">
+                <span>
+                    <span>نسخه</span>
+                    <span><a href="{% url 'app_patient:patient_detail' prescription.patient.id %}">{{ prescription.patient.full_name }}</a></span>
+                </span>
+                <span>
+                    <span>تاریخ تجویز:</span>
+                    <span>{{ prescription.datetime|date:"Y/m/d" }}</span>
+                </span>
+            </h4>
+            <h4 class="play_fair_font text-secondary text-left mb-3" data-aos="fade-up" data-aos-duration="1500">
+                {{ prescription.medicine_list|linebreaks }}
+            </h4>
+            <div class="mb-1" data-aos="fade-up" data-aos-duration="2500">
+                <a href="{% url 'app_patient:update_prescription' prescription.pk %}" class="btn btn-success b_nazanin">ویرایش</a>
+                <a href="{% url 'app_patient:delete_prescription' prescription.pk %}" class="btn btn-danger b_nazanin">حذف</a>
+                <a href="{% url 'app_patient:prescription_list' prescription.patient.pk %}" class="btn btn-info b_nazanin">بازگشت به نسخه های تجویز شده</a>
+            </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-duration="2000">
+            <img src="{% static 'images/prescription.png' %}" class="img-fluid">
+        </div>
+
+    </div>
+{% endblock %}

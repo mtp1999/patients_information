@@ -1,0 +1,51 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    تجویز نسخه جدید
+{% endblock %}
+
+{% block content %}
+    <div class="row align-items-center p-1">
+
+        <!-- form -->
+        <form action="" method="post" class="col-md-6 text-right">
+            {% csrf_token %}
+
+            <div hidden>
+                {{ form.datetime }}
+            </div>
+            <h4 class="font-weight-bold b_nazanin py-2 px-3 row justify-content-between" data-aos="fade-up" data-aos-duration="1200">
+                <span>
+                    <span>بروزرسانی نسخه</span>
+                    <span><a href="{% url 'app_patient:patient_detail' prescription.patient.id %}">({{ prescription.patient.full_name }})</a></span>
+                </span>
+                <span>
+                    <span>تاریخ تجویز:</span>
+                    <span>{{ prescription.datetime|date:"Y/m/d" }}</span>
+                </span>
+            </h4>
+
+            <!-- patient id -->
+            <select name="patient" required="" id="id_patient" hidden>
+              <option value="{{ prescription.patient.pk }}" selected="selected"></option>
+            </select>
+
+            <!-- medicine list -->
+            <textarea class="form-control text-left mb-3 dir_ltr" name="medicine_list" cols="40" rows="5" id="id_medicine_list" placeholder="english" data-aos="fade-up" data-aos-duration="1500">{{ form.medicine_list.value }}</textarea>
+
+            <!-- buttons -->
+            <div class="mb-1" data-aos="fade-up" data-aos-duration="2000">
+                <button type="submit" class="btn btn-success b_nazanin">ویرایش</button>
+                <a href="{% url 'app_patient:prescription_detail' prescription.pk %}" class="btn btn-info b_nazanin">بازگشت</a>
+            </div>
+        </form>
+        <!-- form end -->
+
+        <div class="col-md-6">
+            <img src="{% static 'images/create_form.png' %}" class="img-fluid" data-aos="fade-up" data-aos-duration="2000">
+        </div>
+
+
+    </div>
+{% endblock %}
