@@ -1,0 +1,104 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    ثبت ویزیت جدید
+{% endblock %}
+
+{% block content %}
+    <!-- header -->
+    <h4 class="b_koodak_font text-secondary text-end border-bottom border-secondary pb-2 mb-3 pe-lg-5">
+        ثبت ویزیت جدید
+        <a href="{% url 'app_patient:patient_detail' patient.id %}" class="text-success text-opacity-50">({{ patient.full_name }})</a>
+    </h4>
+    <!-- form -->
+    <div class="container mx-auto row p-1">
+
+        <!-- form -->
+        <form method="post" action="" class="col-11 mx-auto play_fair_font box_shadow py-5 px-3 b_koodak_font text-secondary row" data-aos="fade-up" data-aos-duration="1300">
+            {% csrf_token %}
+
+            <!-- patient id -->
+            <select name="patient" required="" id="id_patient" hidden>
+              <option value="{{ patient.pk }}" selected="selected"></option>
+            </select>
+
+            <!-- chief complaint -->
+            <div class="col-11 mx-auto row justify-content-between align-items-center mb-4">
+                <label for="id_chief_complaint" class="col-auto form-label">شکایت بیمار</label>
+                <label for="id_chief_complaint" class="col-auto text-start form-label arial_font">Chief complaint</label>
+                <textarea name="chief_complaint" id="id_chief_complaint" cols="30" rows="5" class="form-control b_nazanin" placeholder="شکایت بیمار"></textarea>
+            </div>
+
+            <!-- Physical exam -->
+            <div class="col-11 mx-auto row justify-content-between align-items-center mb-4">
+                <label for="id_physical_exam" class="col-auto form-label">معاینات</label>
+                <label for="id_physical_exam" class="col-auto form-label text-start arial_font">Physical exam</label>
+                <textarea name="physical_exam" cols="30" rows="5" class="form-control b_nazanin" id="id_physical_exam" placeholder="معاینات"></textarea>
+            </div>
+
+            <!-- Para clinic -->
+            <div class="col-11 mx-auto row justify-content-between align-items-center mb-4">
+                <label for="id_para_clinic" class="col-auto form-label">آزمایشات</label>
+                <label for="id_para_clinic" class="col-auto form-label text-start arial_font">Para clinic</label>
+                <textarea name="para_clinic" cols="30" rows="5" class="form-control b_nazanin" id="id_para_clinic" placeholder="آزمایشات"></textarea>
+            </div>
+
+            <!-- checklist -->
+            <div class="col-11 mx-auto row justify-content-around mb-4">
+                <div class="col-12 border-bottom border-success border-5 border-opacity-25 row justify-content-between mb-2">
+                    <div class="col-auto">چک لیست</div>
+                    <div class="col-auto arial_font text-start">checklist</div>
+                </div>
+                <div class="form-check col-auto">
+                    <label class="form-check-label" for="id_manipulation">Manipulation</label>
+                    <input class="form-check-input" type="checkbox" name="manipulation" id="id_manipulation">
+                </div>
+                <div class="form-check col-auto">
+                    <label for="id_needle" class="form-check-label">Needle</label>
+                    <input type="checkbox" name="needle" id="id_needle" class="form-check-input">
+                </div>
+                <div class="form-check col-auto">
+                    <label for="id_injection" class="form-check-label">Injection</label>
+                    <input type="checkbox" name="injection" id="id_injection" class="form-check-input">
+                </div>
+                <div class="form-check col-auto">
+                    <label for="id_emg" class="form-check-label">EMG</label>
+                    <input type="checkbox" name="emg" id="id_emg" class="form-check-input">
+                </div>
+                <div class="form-check col-auto">
+                    <label for="id_physiotherapy" class="form-check-label">Physiotherapy</label>
+                    <input type="checkbox" name="physiotherapy" id="id_physiotherapy" class="form-check-input">
+                </div>
+            </div>
+
+            <!-- procedure -->
+            <div class="col-11 mx-auto row justify-content-between align-items-center mb-4">
+                <label for="id_procedure" class="col-auto form-label">روند درمان</label>
+                <label for="id_procedure" class="col-auto form-label text-start">Procedure</label>
+                <textarea name="procedure" cols="30" rows="5" class="form-control b_nazanin" id="id_procedure" placeholder="روند درمان"></textarea>
+            </div>
+
+            <!-- payment -->
+            <div class="col-11 mx-auto row justify-content-between align-items-center mb-4">
+                <label for="id_payment" class="form-label">هزینه پرداخت شده (هزار تومان)</label>
+                <input type="number" name="payment" class="form-control text-start dir_ltr" value="0" required="" id="id_payment">
+            </div>
+
+
+
+            <!-- datetime -->
+            <div hidden>
+                {{ form.datetime }}
+            </div>
+
+            <!-- button -->
+            <div class="mb-1 px-5 text-end">
+                <button type="submit" class="btn btn-lg btn_green m-1">ثبت</button>
+                <a href="{% url 'app_patient:visit_list' patient.pk %}" class="btn btn-lg m-1">لیست ویزیت ها</a>
+            </div>
+
+        </form>
+
+    </div>
+{% endblock %}

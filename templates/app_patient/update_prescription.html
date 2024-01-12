@@ -1,0 +1,58 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    بروزرسانی نسخه
+    {{ prescription.patient.full_name }}
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto row align-items-center p-1">
+
+        <!-- form -->
+        <form action="" method="post" class="col-md-6 text-end" enctype='multipart/form-data' data-aos="fade-up" data-aos-duration="1500">
+            {% csrf_token %}
+
+            <div hidden>
+                {{ form.datetime }}
+            </div>
+            <h5 class="py-2 px-3 row justify-content-between b_koodak_font text-secondary">
+                <span class="col-auto text-end">
+                    بروزرسانی نسخه
+                    <a href="{% url 'app_patient:patient_detail' prescription.patient.id %}" class="text-success text-opacity-50">{{ prescription.patient.full_name }}</a>
+                </span>
+                <span class="col-auto text-start">
+                    تاریخ تجویز:
+                    {{ prescription.datetime|date:"Y/m/d" }}
+                </span>
+            </h5>
+
+            <!-- patient id -->
+            <select name="patient" required="" id="id_patient" hidden>
+              <option value="{{ prescription.patient.pk }}" selected="selected"></option>
+            </select>
+
+            <!-- medicine list -->
+            <textarea class="form-control text-end mb-3" name="medicine_list" cols="40" rows="5" id="id_medicine_list" placeholder="فارسی">{{ form.medicine_list.value }}</textarea>
+
+            <!-- image -->
+            <input type="file" name="image" accept="image/*" class="form-control mb-3">
+
+            <!-- buttons -->
+            <div class="mb-1" data-aos="fade-up" data-aos-duration="2000">
+                {% if prescription.image %}
+                    <a href="{{ prescription.image.url }}" class="btn bg-info bg-opacity-50" target="_blank">مشاهده نسخه</a>
+                {% endif %}
+                <button type="submit" class="btn btn_green">ویرایش</button>
+                <a href="{% url 'app_patient:prescription_detail' prescription.pk %}" class="btn btn-light">بازگشت</a>
+            </div>
+        </form>
+        <!-- form end -->
+
+        <div class="col-md-6">
+            <img src="{% static 'images/create_form.png' %}" class="img-fluid">
+        </div>
+
+
+    </div>
+{% endblock %}

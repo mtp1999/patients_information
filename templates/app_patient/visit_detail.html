@@ -1,0 +1,154 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    مشاهده ویزیت
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto row align-items-center justify-content-center">
+
+        <!-- visit detail -->
+        <div class="col-11 col-md-6 mx-auto text-end mb-3 box_shadow py-4 text-secondary b_koodak_font" data-aos="fade-up" data-aos-duration="1200">
+
+            <!-- patient name -->
+            <h4 class="py-2 border-bottom border-success border-3 border-opacity-50 row justify-content-between mb-5">
+                <span class="col-auto text-end">
+                    ویزیت
+                    <a href="{% url 'app_patient:patient_detail' visit.patient.id %}" class="text-success text-opacity-50">{{ visit.patient.full_name }}</a>
+                </span>
+                <span class="col-auto text-start">
+                    {{ visit.datetime|date:"Y/m/d" }}
+                </span>
+            </h4>
+
+            <!-- chief complaint -->
+            <div class="mb-5">
+                <div class="row justify-content-between fw-bold border-bottom border-success border-3 border-opacity-50">
+                    <div class="col-6">شکایت بیمار</div>
+                    <div class="col-6 text-start arial_font">Chief complaint</div>
+                </div>
+                <div class="b_nazanin mb-3">
+                    {{ visit.chief_complaint|linebreaks }}
+                </div>
+            </div>
+
+            <!-- Physical exam -->
+            <div class="mb-5">
+                <div class="row justify-content-between fw-bold border-bottom border-success border-3 border-opacity-50">
+                    <div class="col-6">معاینات</div>
+                    <div class="col-6 text-start arial_font">Physical exam</div>
+                </div>
+                <div class="b_nazanin mb-3">
+                    {{ visit.physical_exam|linebreaks }}
+                </div>
+            </div>
+
+            <!-- para clinic -->
+            <div class="mb-5">
+                <div class="row justify-content-between fw-bold border-bottom border-success border-3 border-opacity-50">
+                    <div class="col-6">آزمایشات</div>
+                    <div class="col-6 text-start arial_font">Para clinic</div>
+                </div>
+                <div class="b_nazanin mb-3">
+                    {{ visit.para_clinic|linebreaks }}
+                </div>
+            </div>
+
+            <!-- checklist and procedure-->
+            <div class="mb-3">
+
+                <!-- title-->
+                <div class="row justify-content-between fw-bold border-bottom border-success border-3 border-opacity-50">
+                    <div class="col-6">روند درمان</div>
+                    <div class="col-6 text-start arial_font">Procedure</div>
+                </div>
+
+                <div class="row justify-content-between">
+                    <!-- procedure -->
+                    <div class="text-end mb-3 col-sm-6">
+                        <div class="b_nazanin mb-3">
+                            {{ visit.procedure|linebreaks }}
+                        </div>
+                    </div>
+                    <!-- checklist -->
+                    <div class="mb-3 text-start col-sm-6">
+                        <div>
+                            <span>manipulation</span>
+                            <span>
+                                {% if visit.manipulation %}
+                                <img src="{% static 'icons/check.png' %}" alt="Bootstrap" width="16" height="16" class="rounded">
+                                {% else %}
+                                <img src="{% static 'icons/uncheck.svg' %}" alt="Bootstrap" width="16" height="16" class="rounded">
+                            {% endif %}
+                            </span>
+                        </div>
+                        <div>
+                            <span>needle</span>
+                            <span>
+                                {% if visit.needle %}
+                                <img src="{% static 'icons/check.png' %}" alt="Bootstrap" width="16" height="16" class="rounded">
+                                {% else %}
+                                <img src="{% static 'icons/uncheck.svg' %}" alt="Bootstrap" width="16" height="16" class="rounded">
+                            {% endif %}
+                            </span>
+                        </div>
+                        <div>
+                            <span>injection</span>
+                            <span>
+                                {% if visit.injection %}
+                                <img src="{% static 'icons/check.png' %}" alt="Bootstrap" width="16" height="16" class="rounded">
+                                {% else %}
+                                <img src="{% static 'icons/uncheck.svg' %}" alt="Bootstrap" width="16" height="16" class="rounded">
+                            {% endif %}
+                            </span>
+                        </div>
+                        <div>
+                            <span>EMG</span>
+                            <span>
+                                {% if visit.emg %}
+                                <img src="{% static 'icons/check.png' %}" alt="Bootstrap" width="16" height="16" class="rounded">
+                                {% else %}
+                                <img src="{% static 'icons/uncheck.svg' %}" alt="Bootstrap" width="16" height="16" class="rounded">
+                            {% endif %}
+                            </span>
+                        </div>
+                        <div>
+                            <span>physiotherapy</span>
+                            <span>
+                                {% if visit.physiotherapy %}
+                                <img src="{% static 'icons/check.png' %}" alt="Bootstrap" width="16" height="16" class="rounded">
+                                {% else %}
+                                <img src="{% static 'icons/uncheck.svg' %}" alt="Bootstrap" width="16" height="16" class="rounded">
+                            {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- payment -->
+            <div class="text-end mb-3 px-1">
+                <h5 class="mb-3">
+                    <span>هزینه ویزیت و درمان:</span>
+                    <span>{{ visit.payment }}</span>
+                    <span>هزارتومان</span>
+                </h5>
+            </div>
+
+            <!-- buttons -->
+            <div class="mb-1">
+                <a href="{% url 'app_patient:update_visit' visit.pk %}" class="btn btn_green">ویرایش</a>
+                <a href="{% url 'app_patient:delete_visit' visit.pk %}" class="btn bg-danger bg-opacity-50">حذف</a>
+                <a href="{% url 'app_patient:visit_list' visit.patient.pk %}" class="btn btn-light">لیست ویزیت ها</a>
+            </div>
+        </div>
+
+        <!-- image -->
+        <div class="col-md-6" data-aos="fade-up" data-aos-duration="2000">
+            <img src="{% static 'images/visit_purple.svg' %}" class="img-fluid">
+        </div>
+
+    </div>
+{% endblock %}

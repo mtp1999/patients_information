@@ -1,0 +1,103 @@
+@font-face {
+  font-family: b_nazanin;
+  src: url("../fonts/BNazanin.ttf");
+}
+
+@font-face {
+  font-family: arial;
+  src: url("../fonts/arial.ttf");
+}
+
+@font-face {
+  font-family: b_koodak;
+  src: url("../fonts/b_koodak_b.woff");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+html{
+    scroll-behavior:smooth;
+}
+
+.b_koodak_font{
+    font-family: b_koodak;
+}
+
+.b_nazanin {
+    font-family: b_nazanin;
+    direction: rtl;
+}
+
+.arial_font {
+    font-family: arial;
+    direction: rtl;
+}
+
+.dir_ltr{
+    direction: ltr;
+}
+
+.mb_100px{
+    margin-bottom: 100px;
+}
+
+.mb_200px{
+    margin-bottom: 200px;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+a:hover{
+    opacity: 0.7;
+}
+
+.box_shadow, input, textarea, select{
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+
+.btn{
+    border: none;
+    font-weight: bold;
+    font-family: b_koodak;
+    box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 15px;
+}
+
+.btn:hover{
+    opacity: 0.7;
+}
+
+/*--------------------------------------------------------------
+# colors
+--------------------------------------------------------------*/
+
+.bg_inherit{
+    background-color: inherit;
+}
+
+.bg_green{
+    background-color: rgb(198, 225, 225);
+}
+
+.btn_green{
+    background-color: rgb(198, 225, 225) !important;
+    color: rgb(27, 37, 80) !important;
+}
+
+/*--------------------------------------------------------------
+# navbar
+--------------------------------------------------------------*/
+
+nav a:hover{
+    opacity: 0.7;
+}
+
+/*--------------------------------------------------------------
+# footer
+--------------------------------------------------------------*/

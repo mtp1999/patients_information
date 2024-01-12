@@ -1,0 +1,32 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    حذف ویزیت
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto row align-items-center">
+        <form class="text-end col-md-6" method="post" action="">
+            {% csrf_token %}
+            <h3 class="b_nazanin font-weight-bold mb-3" data-aos="fade-up" data-aos-duration="1000">
+                <span> حذف ویزیت مراجعه کننده به نام</span>
+                <span>{{ visit.patient.full_name }}</span>
+            </h3>
+            <h4 class="b_nazanin p-2 row justify-content-between" data-aos="fade-up" data-aos-duration="1200">
+                <span>
+                    <span>تاریخ ویزیت:</span>
+                    <span>{{ visit.datetime|date:"Y/m/d" }}</span>
+                </span>
+            </h4>
+            <div class="mb-1" data-aos="fade-up" data-aos-duration="2500">
+                <button type="submit" class="btn btn-lg bg-danger bg-opacity-50">حذف</button>
+                <a href="{% url 'app_patient:visit_detail' visit.id %}" class="btn btn-lg btn-light">بازگشت</a>
+            </div>
+        </form>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-duration="2000">
+            <img src="{% static 'images/delete.png' %}" class="img-fluid">
+        </div>
+    </div>
+{% endblock %}

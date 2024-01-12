@@ -1,0 +1,30 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    حذف پرونده
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto row align-items-center justify-content-center p-1">
+        <form class="text-end col-11 col-md-6 p-3" method="post" action="" data-aos="fade-up" data-aos-duration="1000">
+            {% csrf_token %}
+            <h3 class="b_nazanin font-weight-bold mb-3">
+                <span> حذف پرونده مراجعه کننده با کد ملی:</span>
+                <span>{{ patient.national_code }}</span>
+            </h3>
+            <h3 class="b_nazanin font-weight-bold mb-3">
+                <span>به نام:</span>
+                <span>{{ patient.full_name }}</span>
+            </h3>
+            <div class="mb-1">
+                <button type="submit" class="btn btn-lg bg-danger bg-opacity-50">حذف</button>
+                <a class="btn btn-lg" href="{% url 'app_patient:patient_detail' patient.pk %}">بازگشت</a>
+            </div>
+        </form>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-duration="2000">
+            <img src="{% static 'images/delete.png' %}" class="img-fluid">
+        </div>
+    </div>
+{% endblock %}

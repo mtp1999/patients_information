@@ -1,0 +1,33 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+
+{% block title %}
+    ورود
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="container mx-auto row align-items-center">
+        <div class="col-md-6">
+            <form action="" method="post" class="m-5 text-end" data-aos="fade-up" data-aos-duration="1000">
+                {% csrf_token %}
+              <div class="form-group mb-3" data-aos="fade-up" data-aos-duration="1500">
+                <label for="email" class="b_nazanin text-secondary"><h3>آدرس ایمیل</h3></label>
+                <input type="email" class="form-control text-start dir_ltr" id="email" name="email" aria-describedby="emailHelp" placeholder="example.example@gmail.com">
+              </div>
+              <div class="form-group mb-3" data-aos="fade-up" data-aos-duration="2000">
+                <label for="password" class="b_nazanin text-secondary"><h3>رمز عبور</h3></label>
+                <input type="password" class="form-control text-start dir_ltr" id="password" name="password" placeholder="Password">
+              </div>
+              <button type="submit" class="btn btn-lg btn_green" data-aos="fade-up" data-aos-duration="2500">ثبت</button>
+            </form>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-duration="1500">
+            <img class="img-fluid" src="{% static 'images/Login.png' %}">
+        </div>
+    </div>
+{% endblock %}
+
+

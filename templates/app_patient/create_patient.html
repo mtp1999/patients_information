@@ -1,0 +1,50 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    ایجاد پرونده جدید
+{% endblock %}
+
+
+{% block content %}
+    <div class="container mx-auto row align-items-center justify-content-center">
+        <form class="text-end col-11 col-md-5 box_shadow p-2 p-lg-4" method="post" action="" data-aos="fade-up" data-aos-duration="1000">
+            {% csrf_token %}
+            <h3 class="b_nazanin text-dark text-opacity-75 font-weight-bold mb-3 border-bottom border-3 border-success border-opacity-25 p-2">
+                ثبت پرونده جدید
+            </h3>
+            <div class="mb-3">
+              <label for="id_national_code" class="form-label b_nazanin"><h4>کد ملی</h4></label>
+              <input type="text" class="form-control text-start dir_ltr" id="id_national_code" name="national_code" maxlength="30" required placeholder="national code">
+            </div>
+            <div class="mb-3">
+              <label for="id_first_name" class="form-label b_nazanin"><h4>نام</h4></label>
+              <input type="text" class="form-control b_nazanin" id="id_first_name" maxlength="100" required name="first_name" placeholder="نام">
+            </div>
+            <div class="mb-3">
+              <label for="id_last_name" class="form-label b_nazanin"><h4>نام خانوادگی</h4></label>
+              <input type="text" class="form-control b_nazanin" id="id_last_name" name="last_name" maxlength="100" required placeholder="نام خانوادگی">
+            </div>
+            <div class="mb-3">
+              <label for="id_birth_year" class="form-label b_nazanin"><h4>سال تولد(شمسی)</h4></label>
+              <input type="number" min="1300" class="form-control text-start dir_ltr" id="id_birth_year" required name="birth_year" placeholder="birth year">
+            </div>
+            <div class="mb-3">
+              <label for="id_past_medical_history" class="form-label b_nazanin">
+                <h4>سابقه بیماری/دارویی/درمانی</h4>
+                <h5 class="b_nazanin text-secondary text-end">
+                    دیابت-فشارخون-بیماریهای قلبی و عروقی-بیماریهای خاص-اختلالات انعقادی-سابقه جراحی-حساسیت دارویی
+                </h5>
+              </label>
+              <textarea class="form-control b_nazanin" id="id_past_medical_history" name="past_medical_history" placeholder="سابقه بیماری/دارویی/درمانی"></textarea>
+            </div>
+            <div class="mb-1">
+              <button type="submit" class="btn btn-lg btn_green">ثبت</button>
+            </div>
+        </form>
+
+        <div class="col-md-7" data-aos="fade-up" data-aos-duration="2000">
+            <img src="{% static 'images/create_form.png' %}" class="img-fluid">
+        </div>
+    </div>
+{% endblock %}

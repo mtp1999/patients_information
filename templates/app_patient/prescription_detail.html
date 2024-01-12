@@ -1,0 +1,40 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    مشاهده نسخه
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto row align-items-center p-1">
+
+        <div class="col-11 col-md-6 text-end mb-3 box_shadow rounded-3 py-4 mx-auto" data-aos="fade-up" data-aos-duration="1200">
+            <h4 class="py-2 mb-4 border-bottom border-success border-5 border-opacity-25 row justify-content-between b_koodak_font text-secondary">
+                <span class="col-auto">
+                    نسخه
+                    <a href="{% url 'app_patient:patient_detail' prescription.patient.id %}" class="text-success text-opacity-50">{{ prescription.patient.full_name }}</a>
+                </span>
+                <span class="col-auto text-start">
+                    تاریخ تجویز:
+                    {{ prescription.datetime|date:"Y/m/d" }}
+                </span>
+            </h4>
+            <h4 class="arial_font text-secondary text-end mb-4">
+                {{ prescription.medicine_list|linebreaks }}
+            </h4>
+            <div class="mb-1">
+                {% if prescription.image %}
+                    <a href="{{ prescription.image.url }}" class="btn bg-info bg-opacity-50" target="_blank">مشاهده نسخه</a>
+                {% endif %}
+                <a href="{% url 'app_patient:update_prescription' prescription.pk %}" class="btn btn_green">ویرایش</a>
+                <a href="{% url 'app_patient:delete_prescription' prescription.pk %}" class="btn bg-danger bg-opacity-50">حذف</a>
+                <a href="{% url 'app_patient:prescription_list' prescription.patient.pk %}" class="btn btn-light">بازگشت به نسخه های تجویز شده</a>
+            </div>
+        </div>
+
+        <div class="col-md-6" data-aos="fade-up" data-aos-duration="2000">
+            <img src="{% static 'images/prescription.png' %}" class="img-fluid">
+        </div>
+
+    </div>
+{% endblock %}

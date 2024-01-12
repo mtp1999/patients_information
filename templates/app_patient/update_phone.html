@@ -1,0 +1,45 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    شماره تماس
+    {{ phone.patient.full_name }}
+{% endblock %}
+
+
+{% block content %}
+    <div class="container mx-auto row align-items-center">
+        <form class="text-right col-11 col-md-5 p-4 box_shadow" method="post" action="" data-aos="fade-up" data-aos-duration="1000">
+            {% csrf_token %}
+            <h3 class="b_nazanin font-weight-bold mb-3 border-bottom border-opacity-50 border-3 border-success py-2">
+                شماره تماس
+                {{ phone.patient.full_name }}
+            </h3>
+
+            <select name="patient" required id="id_patient" hidden>
+              <option value="{{ phone.patient.pk }}" selected="selected"></option>
+            </select>
+            <div class="mb-3">
+              <label for="id_number1" class="form-label b_nazanin"><h4>شماره تماس ۱</h4></label>
+              <input type="text" class="form-control text-start dir_ltr" id="id_number1" name="number1" value="{% if phone.number1 %}{{ phone.number1 }}{% endif %}" maxlength="11" placeholder="number1">
+            </div>
+            <div class="mb-3">
+              <label for="id_number2" class="form-label b_nazanin"><h4>شماره تماس ۲</h4></label>
+              <input type="text" class="form-control text-start dir_ltr" id="id_number2" name="number2" value="{% if phone.number2 %}{{ phone.number2 }}{% endif %}" maxlength="11" placeholder="number2">
+            </div>
+            <div class="mb-3">
+              <label for="id_number3" class="form-label b_nazanin"><h4>شماره تماس ۳</h4></label>
+              <input type="text" class="form-control text-start dir_ltr" id="id_number3" name="number3" value="{% if phone.number3 %}{{ phone.number3 }}{% endif %}" maxlength="11" placeholder="number3">
+            </div>
+
+            <div class="mb-1">
+              <button type="submit" class="btn btn-lg btn_green">ویرایش</button>
+              <a href="{% url 'app_patient:patient_detail' phone.patient.pk %}" class="btn btn-lg">بازگشت</a>
+            </div>
+        </form>
+
+        <div class="col-md-7" data-aos="fade-up" data-aos-duration="2000">
+            <img src="{% static 'images/phone.png' %}" class="img-fluid">
+        </div>
+    </div>
+{% endblock %}

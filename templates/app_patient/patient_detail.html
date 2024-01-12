@@ -1,0 +1,127 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    پرونده
+    {{ patient.full_name }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container mx-auto row align-items-center justify-content-center">
+
+        <!-- personal information list -->
+        <ul class="list-group b_nazanin text-end col-11 col-md-6 box_shadow rounded-0 p-3" data-aos="fade-up" data-aos-duration="1000">
+
+            <!-- case id -->
+            <li class="list-group-item border-0">
+              <div class="border-bottom border-success border-3 border-opacity-25 row">
+                    <h4 class="col-6 fw-bold">
+                        شماره پرونده
+                    </h4>
+                    <h4 class="col-6 fw-bold">
+                        {{ patient.id }}
+                    </h4>
+              </div>
+            </li>
+
+            <!-- national code -->
+            <li class="list-group-item border-0">
+              <div class="border-bottom border-success border-3 border-opacity-25 row">
+                  <h4 class="col-6">
+                        کد ملی
+                    </h4>
+                    <h4 class="col-6">
+                        {{ patient.national_code }}
+                    </h4>
+              </div>
+            </li>
+
+            <!-- first name -->
+            <li class="list-group-item border-0">
+              <div class="border-bottom border-success border-3 border-opacity-25 row">
+                  <h4 class="col-6">نام</h4>
+                  <h4 class="col-6">{{ patient.first_name }}</h4>
+              </div>
+            </li>
+
+            <!-- last name -->
+            <li class="list-group-item border-0">
+              <div class="border-bottom border-success border-3 border-opacity-25 row">
+                  <h4 class="col-6">نام خانوادگی</h4>
+                  <h4 class="col-6">{{ patient.last_name }}</h4>
+              </div>
+            </li>
+
+            <!-- age -->
+            <li class="list-group-item border-0">
+              <div class="border-bottom border-success border-3 border-opacity-25 row">
+                  <h4 class="col-6">سن</h4>
+                  <h4 class="col-6">{{ patient.age }}</h4>
+              </div>
+            </li>
+
+            <!-- past medical history -->
+            <li class="list-group-item border-0">
+              <div class="border-bottom border-success border-3 border-opacity-25 row">
+                  <h4 class="col-6">سابقه بیماری-دارویی-درمانی</h4>
+                  <h4 class="col-6">{{ patient.past_medical_history|linebreaks }}</h4>
+              </div>
+            </li>
+
+            <!-- phone numbers -->
+            <li class="list-group-item border-0">
+              <div class="row">
+              {% if patient.phone.number1 %}
+                  <h5 class="col-6">شماره تماس</h5>
+                  <h5 class="col-6">{{ patient.phone.number1 }}</h5>
+              {% endif %}
+              {% if patient.phone.number2 %}
+                  <h5 class="col-6">شماره تماس</h5>
+                  <h5 class="col-6">{{ patient.phone.number2 }}</h5>
+              {% endif %}
+              {% if patient.phone.number3 %}
+                  <h5 class="col-6">شماره تماس</h5>
+                  <h5 class="col-6">{{ patient.phone.number3 }}</h5>
+              {% endif %}
+              </div>
+            </li>
+        </ul>
+
+        <!-- file image -->
+        <div class="col-md-6 text-center" data-aos="fade-up" data-aos-duration="1200">
+            <img src="{% static 'images/file.png' %}" class="img-fluid">
+
+        </div>
+
+        <!-- create, update or delete boxes -->
+        <div class="col-10 b_nazanin text-center row justify-content-center">
+            <div class="col-10 col-md-5 col-lg-5 m-1 p-3 border-bottom border-warning border-opacity-50 border-5 rounded box_shadow" data-aos="fade-up" data-aos-duration="1400">
+                <h4 class="play_fair_font text-secondary">Personal Information</h4>
+                <img src="{% static 'images/file.png' %}" class="img-fluid figure-img px-5">
+                <a href="{% url 'app_patient:update_patient' patient.pk %}" class="btn btn_green mb-3 mx-1">ویرایش اطلاعت شخصی</a>
+                <a class="btn bg-danger bg-opacity-50 mb-3 mx-1" href="{% url 'app_patient:delete_patient' patient.pk %}">حذف پرونده</a>
+            </div>
+            <div class="col-10 col-md-5 col-lg-5 m-1 p-3 border-bottom border-warning border-opacity-50 border-5 rounded box_shadow" data-aos="fade-up" data-aos-duration="1800">
+                <h4 class="play_fair_font text-secondary">Phone Numbers</h4>
+                <img src="{% static 'images/phone.png' %}" class="img-fluid figure-img px-5">
+                <div><a class="btn btn_green mb-3" href="{% url 'app_patient:update_phone' patient.pk %}">ویرایش شماره تماس</a></div>
+            </div>
+            <div class="col-10 col-md-5 col-lg-5 m-1 p-3 border-bottom border-warning border-opacity-50 border-5 rounded box_shadow" data-aos="fade-up" data-aos-duration="1600">
+                <h4 class="play_fair_font text-secondary">Prescriptions</h4>
+                <img src="{% static 'images/prescription.png' %}" class="img-fluid figure-img px-5">
+                <a class="btn btn_green mb-3 mx-1" href="{% url 'app_patient:prescription_list' patient.pk %}">لیست نسخه های تجویز شده</a>
+                <a class="btn btn_green mb-3 mx-1" href="{% url 'app_patient:create_prescription' patient.pk %}">تجویز نسخه جدید</a>
+            </div>
+            <div class="col-10 col-md-5 col-lg-5 m-1 p-3 border-bottom border-warning border-opacity-50 border-5 rounded box_shadow" data-aos="fade-up" data-aos-duration="2000">
+                <h4 class="play_fair_font text-secondary">visits</h4>
+                <img src="{% static 'images/visit_purple.svg' %}" class="img-fluid figure-img px-5">
+                <a class="btn btn_green mb-3 mx-1" href="{% url 'app_patient:visit_list' patient.pk %}">لیست ویزیت ها</a>
+                <a class="btn btn_green mb-3 mx-1" href="{% url 'app_patient:create_visit' patient.pk %}">ثبت ویزیت جدید</a>
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}

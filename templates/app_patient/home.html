@@ -1,0 +1,59 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    صفحه اصلی
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container row align-items-center mx-auto">
+
+            <!-- title and explanation -->
+            <div class="order-1 col-md-6 order-md-0">
+                <div data-aos="fade-up" data-aos-duration="2000">
+                    <h2 class="text-end b_nazanin text-success1" >
+                    سامانه ثبت اطلاعات بیماران
+                    </h2>
+                </div>
+                <div data-aos="fade-up" data-aos-duration="2500" class="text-secondary b_nazanin">
+                    <ul class="list-group list-group-flush text-end">
+                      <li class="list-group-item"><h3>مشخصات فردی</h3></li>
+                      <li class="list-group-item"><h3>سوابق بیماری</h3></li>
+                      <li class="list-group-item"><h3>مراحل درمان</h3></li>
+                      <li class="list-group-item"><h3>سوابق مراجعه</h3></li>
+                      <li class="list-group-item"><h3>نسخه های تجویز شده</h3></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--title image -->
+            <div class="order-0 col-md-6 order-md-1" data-aos="fade-up" data-aos-duration="2000">
+                <img src="{% static "images/Medicine-bro-dark-green.svg" %}">
+            </div>
+
+            {% if request.user.is_authenticated %}
+
+            <!-- search image -->
+            <div class="order-2 col-md-6 my-5 order-md-2" data-aos="fade-up" data-aos-duration="2000" id="search_patient">
+                <img src="{% static 'images/Search-green.png' %}" class="img-fluid">
+            </div>
+
+            <!-- search patient form -->
+            <div class="order-3 col-md-6 my-5 order-md-3" data-aos="fade-up" data-aos-duration="2000">
+                <form method="post" action="{% url 'app_patient:patient_list' %}" class="text-end">
+                    {% csrf_token %}
+                    <h3 class="b_nazanin">
+                        جستجوی پرونده بیمار
+                    </h3>
+                    <input type="text" name="national_code" id="national_code" class="form-control text-start mb-3 dir_ltr" placeholder="national code">
+                    <input type="text" name="last_name" id="last_name" class="form-control text-end mb-3 b_nazanin" placeholder="نام خانوادگی">
+                    <button type="submit" class="btn btn-lg btn_green">جستجو</button>
+                </form>
+            </div>
+
+            {% endif %}
+
+        </div>
+{% endblock %}

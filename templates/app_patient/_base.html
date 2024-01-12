@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% include 'misc/includes/favicon.html' %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link href="{% static 'css/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+    {% block extra_css %}{% endblock %}
+
+</head>
+<body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg bg-light b_nazanin align-items-center box_shadow" data-aos="fade-down" data-aos-duration="1000">
+      <div class="container-fluid align-items-center">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <h3 class="me-auto my-1 order-md-0 order-lg-1 text-success text-opacity-75 fst-italic fw-bold arial_font">Patient Information</h3>
+        <div class="collapse navbar-collapse text-end order-lg-0" id="navbarSupportedContent">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item">
+                    <a class="navbar-brand ml-3 my-1 fw-bold fs-4 text-secondary" href="{% url 'app_patient:home' %}">صفحه اصلی</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="ml-3 my-1 navbar-brand fw-bold fs-4 text-secondary" aria-current="page" href="{% url 'app_patient:create_patient' %}">ثبت پرونده جدید</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="ml-3 my-1 navbar-brand fw-bold fs-4 text-secondary" aria-current="page" href="{% url 'app_patient:home' %}#search_patient">جستجوی پرونده</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn bg-warning bg-opacity-25 ml-3 my-1 navbar-brand" aria-current="page" href="{% url 'app_account:logout' %}">خروج</a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="arial_font ml-3 my-1 navbar-brand fs-6 text-light badge bg-success bg-opacity-50">{{ request.user.email }}</span>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="btn btn-lg btn_green text-white me-3 my-1" href="{% url 'app_account:login' %}">ورود</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+
+
+      </div>
+    </nav>
+
+    <!-- content -->
+    <section class="my-5 mx-auto">
+
+        <!-- messages -->
+        {% block messages %}
+        {% if messages %}
+            <ul class="messages list-group my-5 text-center col-6 m-auto" data-aos="fade-up" data-aos-duration="1000">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }} list-group-item text-decoration-none"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+          {% endif %}
+          {% endblock %}
+
+        {% block content %}{% endblock %}
+    </section>
+
+    <!-- footer -->
+    <footer class="mt-5 pt-5 text-center bg-light box_shadow b_koodak_font">
+            <div class="row align-items-center container mx-auto">
+                <ul class="list-group list-group-flush text-center col-md-6">
+                  <li class="list-group-item bg_inherit text-dark text-opacity-75"><h4>ثبت اطلاعات</h4></li>
+                  <li class="list-group-item bg_inherit text-dark text-opacity-75">مشخصات فردی</li>
+                  <li class="list-group-item bg_inherit text-dark text-opacity-75">سوابق بیماری</li>
+                  <li class="list-group-item bg_inherit text-dark text-opacity-75">مراحل درمان</li>
+                  <li class="list-group-item bg_inherit text-dark text-opacity-75">سوابق مراجعه</li>
+                  <li class="list-group-item bg_inherit text-dark text-opacity-75">نسخه های تجویز شده</li>
+                </ul>
+                <ul class="list-group list-group-flush text-center col-md-6">
+                  <li class="list-group-item bg_inherit text-dark text-opacity-75 border-top-0"><h4>راه های ارتباطی</h4></li>
+                  <li class="list-group-item bg_inherit text-dark text-opacity-75">اینستاگرام</li>
+                  <li class="list-group-item bg_inherit text-dark text-opacity-75">تلگرام</li>
+                  <li class="list-group-item bg_inherit text-dark text-opacity-75">واتس اپ</li>
+                  <li class="list-group-item bg_inherit text-dark text-opacity-75">لینکدین</li>
+                  <li class="list-group-item bg_inherit text-dark text-opacity-75">فیسبوک</li>
+                </ul>
+
+        </div>
+        <h2 class="arial_font dir_ltr text-light mt-3 mb-0 py-3 bg-success bg-opacity-50 box_shadow">@copyright</h2>
+    </footer>
+
+
+
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script>
+        AOS.init();
+    </script>
+
+</body>
+</html>

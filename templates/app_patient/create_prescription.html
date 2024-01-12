@@ -1,0 +1,42 @@
+{% extends 'app_patient/_base.html' %}
+{% load static %}
+
+{% block title %}
+    تجویز نسخه جدید
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto row align-items-center p-1">
+
+        <!-- form -->
+        <form action="" method="post" class="col-md-6 text-end" enctype='multipart/form-data'>
+
+            {% csrf_token %}
+
+            <div hidden="">
+                {{ form.datetime }}
+            </div>
+            <h4 class="b_koodak_font text-secondary py-2" data-aos="fade-up" data-aos-duration="1200">
+                تجویز نسخه جدید
+                <a href="{% url 'app_patient:patient_detail' patient.id %}" class="text-success text-opacity-50">({{ patient.full_name }})</a>
+            </h4>
+            <select name="patient" required="" id="id_patient" hidden>
+              <option value="{{ patient.pk }}" selected="selected"></option>
+            </select>
+            <textarea class="form-control text-end mb-3" name="medicine_list" cols="40" rows="5" id="id_medicine_list" placeholder="فارسی" data-aos="fade-up" data-aos-duration="1500"></textarea>
+            <input type="file" name="image" accept="image/*" class="form-control mb-3" data-aos="fade-up" data-aos-duration="1500">
+            <div class="mb-1" data-aos="fade-up" data-aos-duration="2000">
+                <button type="submit" class="btn btn_green">ثبت</button>
+                <a href="{% url 'app_patient:prescription_list' patient.pk %}" class="btn btn-light">لیست نسخه های تجویز شده</a>
+            </div>
+        </form>
+        <!-- form end -->
+
+        <!-- image -->
+        <div class="col-md-6">
+            <img src="{% static 'images/create_form.png' %}" class="img-fluid" data-aos="fade-up" data-aos-duration="2000">
+        </div>
+
+
+    </div>
+{% endblock %}
